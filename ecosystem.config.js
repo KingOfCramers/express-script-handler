@@ -21,7 +21,7 @@ module.exports = {
       user : 'harrison',
       host : '167.172.137.79',
       key : '~/.ssh/id_rsa',
-      ref  : 'origin/master',
+      ref  : 'origin/master/API',
       repo : 'git@github.com:KingOfCramers/express-script-handler.git',
       path : '/home/harrison',
       'post-deploy' : 'yarn install && pm2 reload ecosystem.config.js --env production && pm2 save'
