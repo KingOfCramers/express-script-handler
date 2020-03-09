@@ -9,10 +9,12 @@ module.exports = {
     // watch: false,
     // max_memory_restart: '1G',
     env: {
-      NODE_ENV: 'development'
+      NODE_ENV: 'development',
+      PORT: 3000,
     },
     env_production: {
-      NODE_ENV: 'production'
+      NODE_ENV: 'production',
+      PORT: 3000,
     }
   }],
 
@@ -20,7 +22,7 @@ module.exports = {
     production : {
       user : 'harrison',
       host : '167.172.137.79',
-      key : '~/.ssh/id_rsa',
+      key : '~/.ssh/id_rsa2',
       ref  : 'origin/master',
       repo : 'git@github.com:KingOfCramers/express-script-handler.git',
       path : '/home/harrison/API',
