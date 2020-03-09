@@ -1,32 +1,36 @@
 module.exports = {
-  apps : [{
-    name: 'API',
-    script: './index.js',
-    // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
-    // args: 'one two',
-    // instances: 1,
-    // autorestart: true,
-    // watch: false,
-    // max_memory_restart: '1G',
-    env: {
-      NODE_ENV: 'development',
-      PORT: 3000,
-    },
-    env_production: {
-      NODE_ENV: 'production',
-      PORT: 3000,
+  apps: [
+    {
+      name: "API",
+      script: "./index.js",
+      // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
+      // args: 'one two',
+      // instances: 1,
+      // autorestart: true,
+      // watch: false,
+      // max_memory_restart: '1G',
+      watch: "../",
+      dev: {
+        NODE_ENV: "development",
+        PORT: 3000,
+      },
+      prod: {
+        NODE_ENV: "production",
+        PORT: 3000
+      }
     }
-  }],
+  ],
 
-  deploy : {
-    production : {
-      user : 'harrison',
-      host : '167.172.137.79',
-      key : '~/.ssh/id_rsa2',
-      ref  : 'origin/master',
-      repo : 'git@github.com:KingOfCramers/express-script-handler.git',
-      path : '/home/harrison/API',
-      'post-deploy' : 'yarn install && pm2 reload ecosystem.config.js --env production && pm2 save'
+  deploy: {
+    production: {
+      user: "harrison",
+      host: "167.172.137.79",
+      key: "~/.ssh/id_rsa2",
+      ref: "origin/master",
+      repo: "git@github.com:KingOfCramers/express-script-handler.git",
+      path: "/home/harrison/API",
+      "post-deploy":
+        "yarn install && pm2 reload ecosystem.config.js --env prod && pm2 save"
     }
   }
 };

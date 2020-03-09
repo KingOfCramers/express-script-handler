@@ -1,14 +1,14 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var routes = require("./routes/routes.js");
+var routes = require("./routes");
 
 var app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-routes(app);
+app.use("/basic", routes);
 
 var server = app.listen(process.env.PORT, () => {
-	console.log(`App running on port ${process.env.PORT}`, server.address().port);
-}); 
+  console.log(`Running app in ${process.env.NODE_ENV} on ${server.address().port}`);
+})
