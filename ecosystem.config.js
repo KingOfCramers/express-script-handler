@@ -10,13 +10,14 @@ module.exports = {
       // watch: false,
       // max_memory_restart: '1G',
       watch: "../",
-      dev: {
+      env_dev: {
         NODE_ENV: "development",
-        PORT: 3000,
+        PORT: 3005,
+        MONGO_PASS: "sdf20bq-sJ_nudDBB"
       },
-      prod: {
+      env_prod: {
         NODE_ENV: "production",
-        PORT: 3000
+        PORT: 3005
       }
     }
   ],

@@ -1,14 +1,22 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var routes = require("./routes");
-
-var app = express();
+const express = require("express");
+const bodyParser = require("body-parser");
+const scripts = require("./routes/scripts");
+const data = require("./routes/data");
+const connect = require("./mongodb/connect");
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/basic", routes);
+app.use("/scripts", scripts);
+app.use("/data", data);
 
-var server = app.listen(process.env.PORT, () => {
-  console.log(`Running app in ${process.env.NODE_ENV} on ${server.address().port}`);
-})
+connect()
+  .then(_ => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Running app in ${process.env.NODE_ENV} on port ${process.env.PORT}`);
+    }) 
+  })
+  .catch(err => {
+    console.log(`Could not connect to mongodb`, err)
+  });
