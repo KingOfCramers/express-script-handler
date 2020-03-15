@@ -1,24 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const { senate, house } = require("../../mongodb/schemas");
-const connect = require("../../mongodb/connect");
 const find = require("../../mongodb/methods/find");
 
 router.get('/senate/:source', async (req,res) => {
   let source = req.params.source;
-  let { minDate, maxDate } = req.query;
-  let option = senate.filter(x => x.collection.collectionName === source)[0];
-  let val = await find(option);
-  console.log(val);
-  res.send(val);
+  let Model = senate.filter(x => x.collection.collectionName === source)[0];
+  let data = await find(Model, req.query);
+  res.send(data);
 });
 
 router.get('/house/:source', async (req,res) => {
   let source = req.params.source;
-  let { minDate, maxDate } = req.query;
-  let option = house.filter(x => x.collection.collectionName === source)[0];
-  let val = await find(option);  
-  res.send(val);
+  let Model = house.filter(x => x.collection.collectionName === source)[0];
+  let data = await find(Model, req.query);  
+  res.send(data);
 });
 
 module.exports = router;

@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const scripts = require("./routes/scripts");
 const data = require("./routes/data");
 const connect = require("./mongodb/connect");
+
+require("./services/cache.js"); // Modify monogose exec function
 const app = express();
 
 app.use(bodyParser.json());
