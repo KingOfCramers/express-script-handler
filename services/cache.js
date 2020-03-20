@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const util = require("util");
 const redis = require("redis");
+const objSize = require("object-sizeof");
 const logger = require("../logger")(module);
 const redisUrl = "redis://localhost:6379";
 let client = redis.createClient(redisUrl);
@@ -30,8 +31,16 @@ mongoose.Query.prototype.exec = async function() {
     return hydratedRedisData;
   }
   
-  logger.info('Creating new value in cache.')
+  logger.info('Creating new value in cache.');
+
   const result = await exec.apply(this, arguments); // Execute the original mongoose search.
-  client.set(key, JSON.stringify(result), 'EX', 10); // Turn mongoose model into string, save in redis.
+
+  let size = objSize(result);
+  if(size > 1000000){
+    logger.info('Value is too large for cache');
+  } else {
+    client.set(key, JSON.stringify(result)); // Turn mongoose model into string, save in redis.
+  }
+
   return result;
 };
