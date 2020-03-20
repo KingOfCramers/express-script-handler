@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const scripts = require("./routes/scripts");
 const data = require("./routes/data");
 const connect = require("./mongodb/connect");
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("tiny"));
 
 app.use("/scripts", scripts);
 app.use("/data", data);
