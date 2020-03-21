@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const util = require("util");
-const redis = require("redis");
 const objSize = require("object-sizeof");
-const logger = require("../logger")(module);
-const redisUrl = "redis://localhost:6379";
-let client = redis.createClient(redisUrl);
+let client = require("../dbs/redis/client");
+const logger = require("../logger");
+
 client.get = util.promisify(client.get);
 const exec = mongoose.Query.prototype.exec; // The original exec function.
 
@@ -18,8 +17,7 @@ mongoose.Query.prototype.exec = async function() {
     return exec.apply(this, arguments);
   }
 
-  logger.info('Using cache.')
-  const keyJSON = Object.assign({}, this.getQuery(), { collection: this.mongooseCollection.name });
+  const keyJSON = Object.assign({}, { collection: this.mongooseCollection.name }, this.getQuery());
   const key = JSON.stringify(keyJSON);
   const cachedValue = await client.get(key);
   if(cachedValue){
