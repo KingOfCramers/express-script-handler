@@ -1,7 +1,7 @@
-const winston = require('winston');
-const { format, transports } = require('winston')
-const path = require('path');
-const moment = require('moment');
+const winston = require("winston");
+const { format, transports } = require("winston");
+const path = require("path");
+const moment = require("moment");
 
 // module's filename.
 const getLabel = function(callingModule) {
@@ -9,23 +9,19 @@ const getLabel = function(callingModule) {
   return path.join(parts[parts.length - 2], parts.pop());
 };
 
-module.exports = (callingModule) => winston.createLogger({
+const level = process.env.LOG_LEVEL || "debug";
+
+const logger = winston.createLogger({
   transports: [
     new transports.Console({
-      // silent: !!process.env.TEST_ENV,
-      // level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
-      level: 'info',
+      level,
       format: format.combine(
         format.timestamp(),
         format.colorize(),
-        format.errors({ stack: true }),
-        format.printf(info => {
-          const message = info[Symbol.for('splat')]
-            ? info.message + ' - ' + info[Symbol.for('splat')][0]
-            : info.message;
-          return `[${moment(info.timestamp).format('lll')}][${getLabel(callingModule)}][${info.level}]: ${message}`;
-        }),
-      ),
-    }),
-  ],
+        format.errors({ stack: true })
+      )
+    })
+  ]
 });
+
+module.exports = logger;

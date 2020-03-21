@@ -13,7 +13,8 @@ module.exports = {
       env_dev: {
         NODE_ENV: "development",
         PORT: 3005,
-        MONGO_PASS: "sdf20bq-sJ_nudDBB"
+        MONGO_PASS: "sdf20bq-sJ_nudDBB",
+        LOG_LEVEL: 'info',
       },
       env_prod: {
         NODE_ENV: "production",
