@@ -3,10 +3,12 @@ module.exports = {
     {
       name: "API",
       script: "./index.js",
+      instances: 0,
+      exec_mode: "cluster",
       // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
       // args: 'one two',
-      // instances: 1,
-      // autorestart: true,
+      // instances: 0,
+      // autorestart: false, // defaults to true
       // watch: false,
       // max_memory_restart: '1G',
       watch: "../",
@@ -19,11 +21,13 @@ module.exports = {
       },
       env_prod: {
         NODE_ENV: "production",
-        PORT: 3005
+        MAX_CACHE_SIZE_IN_MB: 10,
+        PORT: 3005,
+        LOG_LEVEL: 'info',
+        /// MONGO_PASS
       }
     }
   ],
-
   deploy: {
     production: {
       user: "harrison",
