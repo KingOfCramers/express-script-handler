@@ -13,7 +13,7 @@ module.exports = {
     {
       name: "API",
       script: "./index.js",
-      instances: 0,
+      instances: productionObject['INSTANCES'] || 1,
       exec_mode: "cluster",
       watch: "../",
       env_dev: {
