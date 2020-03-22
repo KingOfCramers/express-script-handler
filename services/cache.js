@@ -17,8 +17,11 @@ mongoose.Query.prototype.exec = async function() {
     return exec.apply(this, arguments);
   }
 
-  const keyJSON = Object.assign({}, { collection: this.mongooseCollection.name }, this.getQuery());
-  const key = JSON.stringify(keyJSON);
+  const collection = this.mongooseCollection.name;
+  const query = JSON.stringify(this.getQuery());
+  const key = collection.concat(query);
+  //const keyJSON = Object.assign({}, { collection: this.mongooseCollection.name }, this.getQuery());
+  //const key = JSON.stringify(keyJSON);
   const cachedValue = await client.get(key);
   if(cachedValue){
     logger.info('Returning from cache.');
@@ -29,14 +32,16 @@ mongoose.Query.prototype.exec = async function() {
     return hydratedRedisData;
   }
   
-  logger.info('Creating new value in cache.');
-
   const result = await exec.apply(this, arguments); // Execute the original mongoose search.
-
+  // Don't cache empty result
+  if(Array.isArray(result) && result.length === 0){
+    return result;
+  }
   let size = objSize(result); // Size returns in bytes.
   if(size > process.env.MAX_CACHE_SIZE_IN_MB*1000000){
     logger.info(`Value exceeds the ${process.env.MAX_CACHE_SIZE_IN_MB}mb maximum for caching in redis`);
   } else {
+    logger.info('Creating new value in cache.');
     client.set(key, JSON.stringify(result)); // Turn mongoose model into string, save in redis.
   }
 
