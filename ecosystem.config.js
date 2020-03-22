@@ -8,8 +8,6 @@ for (var key in process.env){
   }
 }
 
-console.log(productionObject);
-
 module.exports = {
   apps: [
     {
