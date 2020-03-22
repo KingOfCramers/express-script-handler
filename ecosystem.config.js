@@ -33,7 +33,7 @@ module.exports = {
   deploy: {
     production: {
       user: "harrison",
-      host: "167.172.137.79",
+      host: productionObject['HOST'],
       key: "~/.ssh/id_rsa2",
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",
