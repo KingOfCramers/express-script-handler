@@ -1,3 +1,15 @@
+require("dotenv").config();
+
+// Places .env variables prefixed with _PM2_ into production object
+let productionObject = {};
+for (var key in process.env){
+  if (key.startsWith("_PM2_")){
+    productionObject[key.substring(5, key.length)] = process.env[key];
+  }
+}
+
+console.log(productionObject);
+
 module.exports = {
   apps: [
     {
@@ -5,12 +17,6 @@ module.exports = {
       script: "./index.js",
       instances: 0,
       exec_mode: "cluster",
-      // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
-      // args: 'one two',
-      // instances: 0,
-      // autorestart: false, // defaults to true
-      // watch: false,
-      // max_memory_restart: '1G',
       watch: "../",
       env_dev: {
         NODE_ENV: "development",
@@ -20,11 +26,7 @@ module.exports = {
         LOG_LEVEL: 'info',
       },
       env_prod: {
-        NODE_ENV: "production",
-        MAX_CACHE_SIZE_IN_MB: 10,
-        PORT: 3005,
-        LOG_LEVEL: 'info',
-        /// MONGO_PASS
+        ...productionObject
       }
     }
   ],
