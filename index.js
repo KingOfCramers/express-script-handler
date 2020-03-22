@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const scripts = require("./routes/scripts");
-const data = require("./routes/data");
 const connect = require("./dbs/mongodb/connect");
 const logger = require("./logger");
+
+const authentication = require("./middleware/authentication");
+const scripts = require("./routes/scripts");
+const data = require("./routes/data");
 
 require("./services/cache.js"); // Modify monogose exec function
 const app = express();
@@ -26,7 +28,7 @@ app.use(morgan('dev', {
     stream: process.stdout 
 }));
 
-app.use("/scripts", scripts);
+app.use("/scripts", authentication, scripts);
 app.use("/data", data);
 
 connect()

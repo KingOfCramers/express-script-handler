@@ -18,6 +18,7 @@ module.exports = {
       watch: "../",
       env_dev: {
         NODE_ENV: "development",
+        SCRIPT_PASSWORD: "testing_scripts",
         PORT: 3005,
         MAX_CACHE_SIZE_IN_MB: 10,
         MONGO_PASS: "sdf20bq-sJ_nudDBB",
