@@ -8,13 +8,14 @@ router.get('/', (req,res) => {
   res.send("Please access a specific script");
 });
 
-router.get('/update/senate/:committee', (req,res) => {
+router.get('/senate/stats/:committee/', (req,res) => {
   let committee = req.params.committee;
-  let script = getScript(committee);
+  res.send(`This is the route for ${committee}`);
 });
 
-router.get('/update/house/:committee', (req,res) => {
-
+router.get('/house/stats/:committee', (req,res) => {
+  let committee = req.params.committee;
+  res.send(`This is the route for ${committee}`);
 });
 
 module.exports = router;

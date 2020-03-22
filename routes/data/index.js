@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { senate, house } = require("../../dbs/mongodb/schemas");
 const { find } = require("../../controllers/senate");
-//const logger = require("../../logger");
 
 router.get('/senate/:source', async (req,res) => {
   let source = req.params.source;
