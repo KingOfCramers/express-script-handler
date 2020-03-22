@@ -13,6 +13,7 @@ module.exports = {
       env_dev: {
         NODE_ENV: "development",
         PORT: 3005,
+        MAX_CACHE_SIZE_IN_MB: 10,
         MONGO_PASS: "sdf20bq-sJ_nudDBB",
         LOG_LEVEL: 'info',
       },

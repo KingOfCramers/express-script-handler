@@ -33,9 +33,9 @@ mongoose.Query.prototype.exec = async function() {
 
   const result = await exec.apply(this, arguments); // Execute the original mongoose search.
 
-  let size = objSize(result);
-  if(size > 1000000){
-    logger.info('Value is too large for cache');
+  let size = objSize(result); // Size returns in bytes.
+  if(size > process.env.MAX_CACHE_SIZE_IN_MB*1000000){
+    logger.info(`Value exceeds the ${process.env.MAX_CACHE_SIZE_IN_MB}mb maximum for caching in redis`);
   } else {
     client.set(key, JSON.stringify(result)); // Turn mongoose model into string, save in redis.
   }
