@@ -4,7 +4,7 @@ const objSize = require("object-sizeof");
 let client = require("../dbs/redis/client");
 const logger = require("../logger");
 
-client.get = util.promisify(client.get);
+client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec; // The original exec function.
 
 mongoose.Query.prototype.cache = function() {
@@ -17,12 +17,11 @@ mongoose.Query.prototype.exec = async function() {
     return exec.apply(this, arguments);
   }
 
-  const collection = this.mongooseCollection.name;
+  const namespace = this.mongooseCollection.name;
   const query = JSON.stringify(this.getQuery());
-  const key = collection.concat(query);
   //const keyJSON = Object.assign({}, { collection: this.mongooseCollection.name }, this.getQuery());
   //const key = JSON.stringify(keyJSON);
-  const cachedValue = await client.get(key);
+  const cachedValue = await client.hget(namespace, query);
   if(cachedValue){
     logger.info('Returning from cache.');
     let redisData = JSON.parse(cachedValue);
@@ -42,7 +41,7 @@ mongoose.Query.prototype.exec = async function() {
     logger.info(`Value exceeds the ${process.env.MAX_CACHE_SIZE_IN_MB}mb maximum for caching in redis`);
   } else {
     logger.info('Creating new value in cache.');
-    client.set(key, JSON.stringify(result)); // Turn mongoose model into string, save in redis.
+    client.hset(namespace, query, JSON.stringify(result)); // Turn mongoose model into string, save in redis.
   }
 
   return result;
