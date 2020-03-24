@@ -1,6 +1,5 @@
-require("dotenv").config();
-
 module.exports = {
   verbose: true,
-  setupFiles: ["dotenv/config"]
+  setupFiles: ["./tests/setup"],
+  testEnvironment: "node"
 };

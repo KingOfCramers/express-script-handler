@@ -1,39 +1,22 @@
-require("dotenv").config();
-
-// Places .env variables prefixed with _PM2_ into production object
-//let productionObject = {};
-//for (var key in process.env){
-  //if (key.startsWith("_PM2_")){
-    //productionObject[key.substring(5, key.length)] = process.env[key];
-  //}
-//}
+require("dotenv").config({ path: `./envs/.${process.env.NODE_ENV}.env` });
 
 module.exports = {
   apps: [
     {
       name: "API",
       script: "./index.js",
-      instances: process.env['INSTANCES'] || 1,
+      instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
       watch: "../",
-      env_dev: {
-        NODE_ENV: "development",
-        SCRIPT_PASSWORD: "testing_scripts",
-        PORT: 3005,
-        MAX_CACHE_SIZE_IN_MB: 10,
-        MONGO_PASS: "sdf20bq-sJ_nudDBB",
-        LOG_LEVEL: 'info',
-      },
-      env_prod: {
+      env: {
         ...process.env
-        // ...productionObject
       }
     }
   ],
   deploy: {
     production: {
       user: "harrison",
-      host: process.env['HOST'],
+      host: process.env.HOST,
       key: "~/.ssh/id_rsa2",
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",

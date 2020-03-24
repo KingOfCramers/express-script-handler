@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "dev": "pm2 flush && NODE_ENV=development pm2 reload ecosystem.config.js && pm2 logs",
+    "deploy-prod": "NODE_ENV=production pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

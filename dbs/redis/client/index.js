@@ -1,7 +1,6 @@
 const logger = require("../../../logger");
 const redis = require("redis");
-const redisUrl = "redis://localhost:6379";
-let client = redis.createClient(redisUrl);
+let client = redis.createClient(process.env.REDIS_URL);
 
 client.on("error", err => logger.error(err));
 client.on("connect", _ => logger.info("Redis connected."));
