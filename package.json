@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -13,9 +13,11 @@
     "redis": "^3.0.2",
     "winston": "^3.2.1"
   },
+  "eslintConfig": {},
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.8.2",
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "supertest": "^4.0.2"
   }
 }

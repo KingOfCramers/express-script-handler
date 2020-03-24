@@ -8,6 +8,4 @@ connect()
       logger.info(`Running app in ${process.env.NODE_ENV} on port ${process.env.PORT}`);
     }) 
   })
-  .catch(err => {
-    logger.info(`Could not connect to mongodb`, err)
-  });
+  .catch(err => logger.info(`Could not connect to mongodb`, err) );
