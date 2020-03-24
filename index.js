@@ -1,35 +1,6 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
 const connect = require("./dbs/mongodb/connect");
 const logger = require("./logger");
-
-const authentication = require("./middleware/authentication");
-const scripts = require("./routes/scripts");
-const data = require("./routes/data");
-
-require("./services/cache.js"); // Modify monogose exec function
-const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(morgan('dev', {
-    skip: function (req, res) {
-        return res.statusCode < 400
-    }, 
-    stream: process.stderr
-}));
-
-app.use(morgan('dev', {
-    skip: function (req, res) {
-        return res.statusCode >= 400
-    }, 
-    stream: process.stdout 
-}));
-
-app.use("/scripts", authentication, scripts);
-app.use("/data", data);
+const app = require("./app");
 
 connect()
   .then(_ => {
