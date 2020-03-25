@@ -14,7 +14,7 @@ const errLogger = morgan((tokens,req,res) => {
   ].join(' ') 
 }, {
     skip: function (req, res) {
-      return res.statusCode < 400 || process.env.SILENT
+      return res.statusCode < 400 || process.env.SILENT === 'true'
     }, 
     stream: process.stderr
 });
@@ -32,7 +32,7 @@ const resLogger = morgan((tokens,req,res) => {
   ].join(' ') 
 }, {
     skip: function (req, res) {
-      return res.statusCode >= 400 || process.env.SILENT
+      return res.statusCode >= 400 || process.env.SILENT === 'true'
     }, 
     stream: process.stdout
 });
