@@ -16,6 +16,7 @@
     "morgan": "^1.9.1",
     "object-sizeof": "^1.5.3",
     "redis": "^3.0.2",
+    "redis-mock": "^0.49.0",
     "winston": "^3.2.1"
   },
   "eslintConfig": {},

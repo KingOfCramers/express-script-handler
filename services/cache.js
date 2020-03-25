@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
-const util = require("util");
 const objSize = require("object-sizeof");
-let client = require("../dbs/redis/client");
 const logger = require("../loggers/winston");
+let client = require("../dbs/redis/client");
 
-client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec; // The original exec function.
 
 mongoose.Query.prototype.cache = function() {
@@ -19,8 +17,6 @@ mongoose.Query.prototype.exec = async function() {
 
   const namespace = this.mongooseCollection.name;
   const query = JSON.stringify(this.getQuery());
-  //const keyJSON = Object.assign({}, { collection: this.mongooseCollection.name }, this.getQuery());
-  //const key = JSON.stringify(keyJSON);
   const cachedValue = await client.hget(namespace, query);
   if(cachedValue){
     logger.info('Returning from cache.');
