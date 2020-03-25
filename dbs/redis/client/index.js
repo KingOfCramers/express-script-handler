@@ -1,4 +1,4 @@
-const logger = require("../../../logger");
+const logger = require("../../../loggers/winston");
 const redis = require("redis");
 let client = redis.createClient(process.env.REDIS_URL);
 

@@ -4,6 +4,9 @@ module.exports = {
   apps: [
     {
       name: "API",
+      args: [
+       "--color"
+      ],
       script: "./index.js",
       instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
@@ -21,8 +24,7 @@ module.exports = {
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",
       path: "/home/harrison/API",
-      "post-deploy":
-        "yarn install && pm2 reload ecosystem.config.js --env prod && pm2 save"
+      "post-deploy": "yarn install && pm2 reload ecosystem.config.js --env prod && pm2 save"
     }
   }
 };

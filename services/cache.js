@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const util = require("util");
 const objSize = require("object-sizeof");
 let client = require("../dbs/redis/client");
-const logger = require("../logger");
+const logger = require("../loggers/winston");
 
 client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec; // The original exec function.

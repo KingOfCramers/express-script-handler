@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/harrisoncramer/.nvm/versions/node/v13.7.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js dev
+  /Users/harrisoncramer/.nvm/versions/node/v13.7.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js prod:reload
 
 PATH: 
   /Users/harrisoncramer/Scripts:/Users/harrisoncramer/.nvm/versions/node/v13.7.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/harrisoncramer/.fzf/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/harrisoncramer/Desktop/Code/projects/process_manager/package.json: Unexpected token } in JSON at position 138
+  SyntaxError: /Users/harrisoncramer/Desktop/Code/projects/process_manager/package.json: Unexpected token } in JSON at position 422
       at JSON.parse (<anonymous>)
       at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -25,7 +25,10 @@ npm manifest:
   {
     "scripts": {
       "test": "jest --watch",
-      "dev": "pm2 flush && NODE_ENV=development pm2 reload ecosystem.config.js && pm2 logs",
+      "dev": "pm2 flush && NODE_ENV=development pm2 reload ecosystem.config.js && pm2 save && pm2 logs",
+      "prod": "pm2 flush && NODE_ENV=production pm2 reload ecosystem.config.js && pm2 save && pm2 monit",
+      "prod:reload": "NODE_ENV=production HAHA=hahah pm2 reload ecosystem.config.js",
+      "prod:deploy": "NODE_ENV=production pm2 deploy ecosystem.config.js production",
     },
     "dependencies": {
       "body-parser": "^1.19.0",

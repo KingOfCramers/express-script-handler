@@ -1,5 +1,5 @@
 const connect = require("./dbs/mongodb/connect");
-const logger = require("./logger");
+const logger = require("./loggers/winston");
 const app = require("./app");
 
 connect()

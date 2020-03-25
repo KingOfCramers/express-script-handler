@@ -1,7 +1,7 @@
 const randomUser = require('random-useragent');
 const axios = require("axios");
 const rp = require("request-promise");
-const logger = require("../logger");
+const logger = require("../loggers/winston");
 
 Array.prototype.flatten = function() {
     var ret = [];
