@@ -7,7 +7,7 @@ module.exports = {
       args: [
        "--color"
       ],
-      interpreter: 'node@v13.7.0',
+      interpreter: process.env.NODE_PATH, 
       script: "./index.js",
       instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
