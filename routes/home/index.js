@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', async (req,res) => {
   res.status(200);
-  res.send('This is the homepage.');
+  res.send('This endpoint will serve up the dashboard');
 });
 
 module.exports = router;
