@@ -18,5 +18,9 @@ app.use(resLogger);
 app.use("/home", home);
 app.use("/scripts", authentication, scripts);
 app.use("/data", data);
+app.use("*", (req,res) => {
+  res.status(404);
+  res.send("This is not a valid url.");
+});
 
 module.exports = app;

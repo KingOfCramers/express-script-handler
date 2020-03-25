@@ -66,11 +66,11 @@ module.exports = {
   // House Committees
   house: [
     mongoose.model('HFAC', dat),
+    mongoose.model('HAPC', dat),
     mongoose.model('HASC', dat),
     mongoose.model('HVAC', dat),
     mongoose.model('HHSC', dat),
     mongoose.model('HAGC', dat),
-    mongoose.model('HAPC', dat),
     mongoose.model('HBUC', dat),
     mongoose.model('HELP', dat),
     mongoose.model('NRGY', dat),

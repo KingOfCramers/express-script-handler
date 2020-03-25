@@ -33,6 +33,7 @@ mongoose.Query.prototype.exec = async function() {
     return result;
   }
   let size = objSize(result); // Size returns in bytes.
+  logger.info(`Query result: ${size / 1000000}mb`);
   if(size > process.env.MAX_CACHE_SIZE_IN_MB*1000000){
     logger.info(`Value exceeds the ${process.env.MAX_CACHE_SIZE_IN_MB}mb maximum for caching in redis`);
   } else {
