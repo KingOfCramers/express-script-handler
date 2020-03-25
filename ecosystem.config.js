@@ -24,7 +24,7 @@ module.exports = {
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",
       path: "/home/harrison/API",
-      "post-deploy": "yarn install && pm2 reload ecosystem.config.js --env prod && pm2 save"
+      "post-deploy": "yarn install && yarn prod"
     }
   }
 };
