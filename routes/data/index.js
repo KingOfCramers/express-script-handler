@@ -6,8 +6,10 @@ const { find } = require("../../controllers/senate");
 router.get('/senate/:source', async (req,res) => {
   let source = req.params.source;
   let Model = senate.filter(x => x.collection.collectionName === source)[0];
-  if(!Model)
-    return res.send("That resource could not be found.");
+  if(!Model){
+    res.status(404);
+    return res.send("That collection could not be found.");
+  }
   let data = await find(Model, req.query);
   res.send(data);
 });
@@ -15,6 +17,10 @@ router.get('/senate/:source', async (req,res) => {
 router.get('/house/:source', async (req,res) => {
   let source = req.params.source;
   let Model = house.filter(x => x.collection.collectionName === source)[0];
+  if(!Model){
+    res.status(404);
+    return res.send("That collection could not be found.");
+  }
   let data = await find(Model, req.query);  
   res.send(data);
 });
