@@ -798,7 +798,6 @@ let large = [
     type: "hearing",
   }
 ];
-
 let hfac = [
   {
     witnesses: ["Brian H. Hook", "Joey Hood", "Marik String"],
