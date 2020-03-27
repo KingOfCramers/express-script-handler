@@ -868,11 +868,31 @@ let senateDisclosures = [
     link: "https://efdsearch.senate.gov/search/view/extension-notice/regular/35ebb0fc-99d3-4912-8cff-3c224eb7d1e1/",
     date: "05/02/2019"
   }
+];
+
+let senateCandidateDisclosures = [
+  {
+    first: "Deedra",
+    last: "Abboud",
+    office: "Candidate",
+    title: "Candidate Report Due Date Extension 1",
+    link: "https://efdsearch.senate.gov/search/view/extension-notice/regular/5beb7900-7d61-4a08-8ee9-771e933be22b/",
+    date: "05/07/2018"
+  },
+  {
+    first: "Barbara",
+    last: "Bollier",
+    office: "Candidate",
+    title: "Candidate Report",
+    link: "https://efdsearch.senate.gov/search/view/annual/55d5cbc0-e819-4a94-a368-0b7a5bf68328/",
+    date: "02/13/2020"
+  }
 ]
 
 module.exports = {
   hfac,
   sfrc,
   large,
-  senateDisclosures
+  senateDisclosures,
+  senateCandidateDisclosures
 };

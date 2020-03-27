@@ -70,6 +70,7 @@ module.exports = {
   // Financial Disclosures
   disclosures: [
     mongoose.model('SENATOR', disclosure),
+    mongoose.model('SENATECANDIDATE', disclosure)
   ],
   // Senate Committees
   senate: [
