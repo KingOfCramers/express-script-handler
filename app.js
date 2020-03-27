@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
-const authentication = require("./middleware/authentication");
+//const authentication = require("./middleware/authentication");
 const { errLogger, resLogger } = require("./loggers/morgan");
 const data = require("./routes/data");
 
