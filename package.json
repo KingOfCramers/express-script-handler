@@ -3,7 +3,7 @@
     "test": "jest --watch --runInBand",
     "dev": "pm2 flush && NODE_ENV=development pm2 reload ecosystem.config.js && pm2 save && pm2 logs",
     "clear": "pm2 delete API && pm2 save && pm2 flush",
-    "prod": "pm2 flush && NODE_ENV=production pm2 reload ecosystem.config.js && pm2 save",
+    "prod": "NODE_ENV=production pm2 reload ecosystem.config.js && pm2 save",
     "prod:deploy": "NODE_ENV=production pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {

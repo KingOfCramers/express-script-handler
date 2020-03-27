@@ -15,8 +15,10 @@ app.use(errLogger);
 app.use(resLogger);
 app.use("/data", data);
 
+
 const publicPath = path.join(__dirname, "frontend", "dist");
-app.use("/home", express.static(publicPath));
+app.use("/dashboard", express.static(publicPath));
+app.use("/", (req, res) => res.redirect("/dashboard"));
 
 app.use("*", (req,res) => {
   res.status(404);
