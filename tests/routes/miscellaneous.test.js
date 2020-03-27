@@ -12,9 +12,9 @@ describe("Testing 404 route", () => {
   })
 });
 
-describe(`Doesn't cache values over process.env.MAX_CACHE_SIZE_IN_MB (${process.env.MAX_CACHE_SIZE_IN_MB}mb)`, () => {
+describe(`Doesn't cache values over ${process.env.MAX_CACHE_SIZE_IN_MB}mb`, () => {
   test("Doesn't cache call, but returns data", async done => {
-    let res = await request(app).get("/data/house/hapcs");
+    let res = await request(app).get("/data/committees/house/hapcs");
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body));
     // Ensure the query was NOT saved to the Redis database...

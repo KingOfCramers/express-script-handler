@@ -3,7 +3,7 @@ const router = express.Router();
 const { disclosures } = require("../../dbs/mongodb/schemas");
 const { find } = require("../../controllers/disclosures");
 
-router.get('/disclosures/:source', async (req,res) => {
+router.get('/:source', async (req,res) => {
   let source = req.params.source;
   let Model = disclosures.filter(x => x.collection.collectionName === source)[0];
   if(!Model){

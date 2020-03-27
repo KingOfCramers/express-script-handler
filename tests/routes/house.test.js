@@ -7,7 +7,7 @@ describe("Testing query of House routes", () => {
 
   test("Query all data", async done => {
     // Query MongoDB and Check data...
-    let res = await request(app).get("/data/house/hfacs");
+    let res = await request(app).get("/data/committees/house/hfacs");
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body));
     let detail = res.body[0].type;
@@ -20,7 +20,7 @@ describe("Testing query of House routes", () => {
   });
 
   test("Disallow improper collection", async done => {
-    let res = await request(app).get("/data/house/thisisnotreal");
+    let res = await request(app).get("/data/committees/house/thisisnotreal");
     expect(res.statusCode).toBe(404);
     expect(res.text).toBe("That collection could not be found.");
     done();
@@ -28,7 +28,7 @@ describe("Testing query of House routes", () => {
 
   test("Query by type", async done => {
     // Query MongoDB and Check data...
-    let res = await request(app).get("/data/house/hfacs?title=U.S.-Libya Policy");
+    let res = await request(app).get("/data/committees/house/hfacs?title=U.S.-Libya Policy");
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body));
     expect(res.body.length === 1);
@@ -43,7 +43,7 @@ describe("Testing query of House routes", () => {
 
   test("Don't allow POST", async done => {
     // Attempt post route.
-    let res = await request(app).post("/data/house/hfacs");
+    let res = await request(app).post("/data/committees/house/hfacs");
     expect(res.statusCode).toBe(404);
     expect(res.text).toBe("This is not a valid url.")
     done();
