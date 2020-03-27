@@ -39,7 +39,38 @@ const dat = {
   },
 };
 
+const disclosure = {
+  first: {
+    type: String,
+    required: true
+  }, 
+  last: {
+    type: String, 
+    required: true
+  },
+  office: {
+    type: String,
+    required: true
+  },
+  title: {
+    required: true,
+    type: String
+  },
+  link: {
+    type: String,
+    required: true
+  }, 
+  date: {
+    type: String,
+    required: true
+  }
+}
+
 module.exports = {
+  // Financial Disclosures
+  disclosures: [
+    mongoose.model('SENATOR', disclosure),
+  ],
   // Senate Committees
   senate: [
     mongoose.model('SFRC', dat),

@@ -851,8 +851,28 @@ let sfrc = [
   }
 ];
 
+let senateDisclosures = [
+  {
+    first: "Sheldon",
+    last: "Whitehouse",
+    office: "Senator",
+    title: "Periodic Transaction Report for 12/11/2017",
+    link: "https://efdsearch.senate.gov/search/view/ptr/5d05e733-82e7-42a4-9653-0859439e3f13/",
+    date: "12/11/2017"
+  },
+  {
+    first: "Pat",
+    last: "Roberts",
+    office: "Senator",
+    title: "Annual Report for 2018 Due Date Extension 1",
+    link: "https://efdsearch.senate.gov/search/view/extension-notice/regular/35ebb0fc-99d3-4912-8cff-3c224eb7d1e1/",
+    date: "05/02/2019"
+  }
+]
+
 module.exports = {
   hfac,
   sfrc,
-  large
+  large,
+  senateDisclosures
 };

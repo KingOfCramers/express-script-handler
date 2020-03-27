@@ -35,7 +35,7 @@ describe("Testing query of House routes", () => {
     let detail = res.body[0].type;
     expect(detail).toBe("hearing");
     // Ensure the query was saved to the Redis database...
-    let redisData = JSON.parse(await client.hget('hfacs', '{}'));
+    let redisData = JSON.parse(await client.hget('hfacs', '{"title":"U.S.-Libya Policy"}'));
     expect(Array.isArray(redisData));
     expect(redisData[0].type === detail);
     done();
