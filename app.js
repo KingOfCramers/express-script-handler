@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const { errLogger, resLogger } = require("./loggers/morgan");
 const committees = require("./routes/committees");
 const disclosures = require("./routes/disclosures");
+const statements = require("./routes/statements");
 
 require("./services/cache.js"); // Modify monogose exec function
 const app = express();
@@ -16,6 +17,7 @@ app.use(errLogger);
 app.use(resLogger);
 app.use("/data/committees", committees);
 app.use("/data/disclosures", disclosures);
+app.use("/data/statements", statements);
 
 const publicPath = path.join(__dirname, "frontend", "dist");
 app.use("/dashboard", express.static(publicPath));
