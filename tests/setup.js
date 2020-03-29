@@ -20,10 +20,12 @@ module.exports = () => {
   const SENATECANDIDATE = disclosures[1];
 
   let db;
-
-  beforeEach(async () => {
+  beforeAll(async () => {
     // Connect to DB.
     db = await connect();
+  });
+
+  beforeEach(async () => {
     // Import and set default data.
     await SFRC.insertMany(sfrc);
     await HFAC.insertMany(hfac);

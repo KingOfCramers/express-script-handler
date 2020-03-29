@@ -16,6 +16,7 @@ var options = {
     level: "info",
     handleExceptions: true,
     stderrLevels: ["error"],
+    silent: process.env.SILENT === "true",
     format: winston.format.combine(
       winston.format.colorize(),
       winston.format.simple()

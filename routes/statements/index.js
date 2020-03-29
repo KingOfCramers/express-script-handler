@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const wrapAsync = require("../../middleware/wrapAsync")
 const { statements } = require("../../controllers/propublica");
 
-router.get('/:date', async (req,res) => {
+router.get('/:date', wrapAsync(async (req,res) => {
   let date = req.params.date;
   let offset = req.query.offset || 0;
   let options = {
@@ -15,6 +16,6 @@ router.get('/:date', async (req,res) => {
   res.status(result.status);
   res.send(result.msg);
 
-  });
+}));
 
 module.exports = router; 
