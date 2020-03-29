@@ -13,7 +13,12 @@ module.exports = {
       return data;
     }
   },
-  deleteHash: async ({ hash, key }) => {
+  deleteHash: async ({ hash }) => {
+    const cachedVal = await client.del(hash);
+    !cachedVal && logger.error(`The hash could not be found. Hash: ${hash}`);
+    return !!cachedVal
+  },
+  deleteHashWithKey: async ({ hash, key }) => {
     const cachedVal = await client.hdel(hash, key);
     !cachedVal && logger.error(`The hash could not be found. Hash: ${hash} Key: ${key}`);
     return !!cachedVal
