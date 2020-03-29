@@ -18,13 +18,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//function wrapAsync(fn){
-  //return function(req,res,next){
-    //// Catch any errors and pass them to next();
-    //fn(req,res,next).catch(next);
-  //};
-//}
-
 // Colorize morgan status-codes and print to console, write all requests  with winston's stream. 
 app.use(errLogger);
 app.use(resLogger);
@@ -33,12 +26,8 @@ app.use(winstonLogger);
 app.use("/data/committees", committees);
 app.use("/data/disclosures", disclosures);
 app.use("/data/statements", statements);
-//app.use("/data/throwerror", wrapAsync(async(req,res) => {
-  //throw new Error("This is a custom error");
-//}));
 app.use("/dashboard", express.static(publicPath));
 app.get("/", (req, res) => res.redirect("/dashboard"));
-
 app.use("*", (req,res) => {
   res.status(404);
   res.send("This is not a valid url.");

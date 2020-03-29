@@ -15,6 +15,7 @@ var options = {
   console: {
     level: "info",
     handleExceptions: true,
+    stderrLevels: ["error"],
     format: winston.format.combine(
       winston.format.colorize(),
       winston.format.simple()
