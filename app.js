@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 // Loggers
-const { errLogger, resLogger, winstonLogger } = require("./loggers/morgan");
+const { morganConsoleErr, morganConsoleRes, morganToWinston } = require("./loggers/morgan");
 // Middleware
 //const authentication = require("./middleware/authentication");
 const { handleMongoError, handleGenericError } = require("./middleware/errors");
@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Colorize morgan status-codes and print to console, write all requests  with winston's stream. 
-app.use(errLogger);
-app.use(resLogger);
-app.use(winstonLogger);
+app.use(morganConsoleErr);
+app.use(morganConsoleRes);
+app.use(morganToWinston);
 
 app.use("/data/committees", committees);
 app.use("/data/disclosures", disclosures);
