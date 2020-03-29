@@ -11,8 +11,8 @@ module.exports = {
       script: "./index.js",
       instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
-      watch: "../",
-      ignore_watch: ["logs/*"],
+      watch: true,
+      ignore_watch: ["logs/*", "node_modules/*", "frontend/node_modules/*"],
       env: {
         ...process.env
       }
