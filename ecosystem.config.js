@@ -12,6 +12,7 @@ module.exports = {
       instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
       watch: "../",
+      ignore_watch: ["logs/*"],
       env: {
         ...process.env
       }

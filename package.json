@@ -7,6 +7,7 @@
     "prod:deploy": "NODE_ENV=production pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "chalk": "^3.0.0",
