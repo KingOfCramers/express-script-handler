@@ -1,0 +1,29 @@
+{
+  "config": {
+    "target": "http://localhost:3005",
+    "phases": [
+      {
+        "duration": 10,
+        "arrivalRate": 20
+      },
+      {
+        "duration": 10,
+        "arrivalRate": 40
+      }
+    ],
+    "defaults": {
+      "headers": {
+        "x-my-service-auth": "blasjdfksdf"
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "flow": [
+        { "get": { "url": "/dashboard" } },
+        { "get": { "url": "/data/committees/house/hfacs" } },
+        { "get": { "url": "/data/statements/2020-03-29" } }
+      ]
+    }
+  ]
+}
