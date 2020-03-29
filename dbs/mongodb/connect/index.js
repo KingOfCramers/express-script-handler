@@ -11,19 +11,25 @@ module.exports = async () => {
     pass: process.env.MONGO_PASS
   };
 
-  let db = await mongoose.connect(process.env.MONGODB_URI, options);
-  logger.info("Connected to MongoDb.");
+  try {
+    mongoose.connect(process.env.MONGODB_URI, options);
+  } catch (err) {
+    logger.error("Could not connect to DB.");
+    process.exit(1);
+  }
 
-  process.on("SIGINT", async () => {
-    logger.info("SIGINT SIGNAL RECIEVED");
-    try {
-      await db.disconnect();
-      logger.info("Closed DB Connection.");
-      process.exit(0);
-    } catch (err) {
-      logger.error("There was a problem closing the db", err);
-      process.exit(1);
-    }
+  const db = mongoose.connection;
+
+  db.on("error", err => {
+    logger.error("Error occured in MongoDB.", err);
+  });
+
+  db.on("disconnected", () => {
+    logger.error("Connection to MongoDB closed.")
+  });
+
+  db.once("open", () => {
+    logger.info("Connection to MongoDB opened.");
   });
 
   return db;

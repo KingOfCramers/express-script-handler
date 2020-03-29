@@ -3,7 +3,7 @@ const logger = require("./loggers/winston");
 const app = require("./app");
 
 connect()
-  .then(_ => {
+  .then(db => {
     app.listen(process.env.PORT, () => {
       logger.info(`Running app in ${process.env.NODE_ENV} on port ${process.env.PORT}`);
     }) 
