@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
 // Loggers
 const { morganConsoleErr, morganConsoleRes, morganToWinston } = require("./loggers/morgan");
@@ -16,6 +17,7 @@ const publicPath = path.join(__dirname, "frontend", "dist");
 require("./services/cache.js"); // Modify monogose exec function
 const app = express();
 
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
