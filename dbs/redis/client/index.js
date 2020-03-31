@@ -1,4 +1,4 @@
-const logger = require("../../../loggers/winston");
+const logger = require("@logger");
 const util = require("util");
 const redis = process.env.NODE_ENV === 'test' 
   ? require("redis-mock") 

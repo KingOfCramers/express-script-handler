@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const wrapAsync = require("../../middleware/wrapAsync")
-const { statements } = require("../../controllers/propublica");
+const wrapAsync = require("@middleware/wrapAsync")
+const { statements } = require("@controllers/propublica");
 
 router.get('/:date', wrapAsync(async (req,res) => {
   let date = req.params.date;

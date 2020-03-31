@@ -2,8 +2,8 @@
 require("dotenv").config({ path: "./envs/.test.env" });
 
 module.exports = () => {
-  const connect = require("../dbs/mongodb/connect");
-  const { senate, house, disclosures } = require("../dbs/mongodb/schemas");
+  const connect = require("@mongodb/connect");
+  const { senate, house, disclosures } = require("@mongodb/schemas");
   const {
     sfrc,
     hfac,
@@ -27,6 +27,7 @@ module.exports = () => {
 
   beforeEach(async () => {
     // Import and set default data.
+    require('module-alias/register'); // Require aliases from package.json file
     await SFRC.insertMany(sfrc);
     await HFAC.insertMany(hfac);
     await SENATOR.insertMany(senateDisclosures);
@@ -50,7 +51,5 @@ module.exports = () => {
     await HAPC.deleteMany({});
     await SENATOR.deleteMany({});
     await SENATECANDIDATE.deleteMany({});
-    // Disconnect from database.
-    await db.disconnect();
   });
 };

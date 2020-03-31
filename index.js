@@ -1,5 +1,6 @@
-const connect = require("./dbs/mongodb/connect");
-const logger = require("./loggers/winston");
+require('module-alias/register'); // Require aliases from package.json file
+const connect = require("@mongodb/connect");
+const logger = require("@logger");
 const app = require("./app");
 
 connect()

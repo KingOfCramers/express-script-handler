@@ -1,10 +1,18 @@
 {
   "scripts": {
-    "test": "jest --watch --runInBand",
+    "test": "jest --watch --runInBand --config ./jest.config.json",
     "dev": "pm2 flush && NODE_ENV=development pm2 reload ecosystem.config.js && pm2 save",
     "clear": "pm2 delete API && pm2 save && pm2 flush",
     "prod": "NODE_ENV=production pm2 reload ecosystem.config.js && pm2 save",
     "prod:deploy": "NODE_ENV=production pm2 deploy ecosystem.config.js production"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@logger": "loggers/winston/",
+    "@mongodb": "dbs/mongodb",
+    "@middleware": "middleware",
+    "@controllers": "controllers",
+    "@app": "./app"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
@@ -14,6 +22,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
+    "module-alias": "^2.2.2",
     "moment": "^2.24.0",
     "mongoose": "^5.9.4",
     "morgan": "^1.9.1",

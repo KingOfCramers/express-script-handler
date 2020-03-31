@@ -1,5 +1,5 @@
 const client = require("../client");
-const logger = require("../../../loggers/winston");
+const logger = require("@logger");
 
 module.exports = {
   getRedisDataOrUseCallback: async ({ key, hash, callback }) => {

@@ -1,4 +1,4 @@
-const app = require("../../app");
+const app = require("@app");
 const request = require("supertest");
 require("../setup")();
 const client = require("../../dbs/redis/client");

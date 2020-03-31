@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const wrapAsync = require("../../middleware/wrapAsync")
-const { deleteRedisHash, deleteRedisHashWithKey } = require("../../controllers/services");
+const wrapAsync = require("@middleware/wrapAsync")
+const { deleteRedisHash, deleteRedisHashWithKey } = require("@controllers/services");
 
 router.get('/deleteRedisHash/:hash', wrapAsync(async (req,res) => {
   let { hash, key } = req.params;

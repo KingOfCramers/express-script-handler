@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const wrapAsync = require("../../middleware/wrapAsync")
-const { disclosures } = require("../../dbs/mongodb/schemas");
-const { find } = require("../../controllers/disclosures");
+const wrapAsync = require("@middleware/wrapAsync")
+const { disclosures } = require("@mongodb/schemas");
+const { find } = require("@controllers/disclosures");
 
 router.get('/:source', wrapAsync(async (req,res) => {
   let source = req.params.source;
