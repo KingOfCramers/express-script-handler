@@ -7,7 +7,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: '[name].[contenthash].js',
   },
   module: {
     rules: [
@@ -23,7 +23,7 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
+      filename: "index.[contenthash].html"
     }),
     new CompressionPlugin
   ]
