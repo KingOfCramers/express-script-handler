@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 // Loggers
 const { morganConsoleErr, morganConsoleRes, morganToWinston } = require("./loggers/morgan");
 // Middleware
-const authentication = require("./middleware/authentication");
+const isFromServer = require("./middleware/isFromServer");
 const { handleMongoError, handleGenericError } = require("./middleware/errors");
 // Routes
 const services = require("./routes/services");
@@ -26,7 +26,7 @@ app.use(morganConsoleErr);
 app.use(morganConsoleRes);
 app.use(morganToWinston);
 
-app.use("/services", services); // Add authentication!
+app.use("/services", isFromServer, services); // Add authentication!
 app.use("/data/committees", committees);
 app.use("/data/disclosures", disclosures);
 app.use("/data/statements", statements);
