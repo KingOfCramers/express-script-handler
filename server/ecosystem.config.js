@@ -1,4 +1,7 @@
 require("dotenv").config({ path: `./envs/.${process.env.NODE_ENV}.env` });
+const path = require("path");
+
+//console.log(__dirname);
 
 module.exports = {
   apps: [
@@ -8,7 +11,7 @@ module.exports = {
        "--color"
       ],
       interpreter: process.env.NODE_PATH, 
-      script: "./index.js",
+      script: path.resolve(__dirname, "index.js"),
       instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
       watch: true,

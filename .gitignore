@@ -7,4 +7,4 @@ yarn-error.log
 bundle.js
 logs
 bundle.js.gz
-frontend/dist/*
+client/dist/*

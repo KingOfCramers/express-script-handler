@@ -12,7 +12,7 @@ const services = require("./routes/services");
 const committees = require("./routes/committees");
 const disclosures = require("./routes/disclosures");
 const statements = require("./routes/statements");
-const publicPath = path.join(__dirname, "frontend", "dist");
+const publicPath = path.join(__dirname, "..",  "client", "dist");
 
 require("./services/cache.js"); // Modify monogose exec function
 const app = express();
