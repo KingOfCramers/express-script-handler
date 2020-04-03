@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, NavLink as Link, Route } from 'react-router-dom';
 
-// home route component
 const HomeComponent = ( props ) => {
     return (
-        <h1>Home Component!</h1>
+        <h1>Wone Component!</h1>
     );
 }
 
