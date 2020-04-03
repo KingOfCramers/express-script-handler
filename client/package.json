@@ -4,7 +4,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:express": "cd ../server && yarn dev",
     "dev:webpack-server": "webpack-dev-server --open",
-    "dev:build": "webpack --mode development --config webpack.config.js"
+    "prod:build": "webpack --mode production --config webpack.config.js"
   },
   "name": "front_end",
   "version": "1.0.0",

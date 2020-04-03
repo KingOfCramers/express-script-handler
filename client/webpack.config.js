@@ -11,6 +11,11 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: '[name].[hash].js',
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   devtool: 'inline-source-map', // Allows us to see errors in specific modules rather than the entire bundle.js file
   devServer: { // Essentially an Express server w/ hot reloading
     contentBase: path.join(__dirname, "./dist"),
