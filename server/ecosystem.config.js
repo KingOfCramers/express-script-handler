@@ -29,7 +29,7 @@ module.exports = {
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",
       path: "/home/harrison/API",
-    "post-deploy": "yarn install --ignore-engines && yarn prod && cd frontend && yarn install --ignore-engines && yarn prod:build"
+      "post-deploy": "yarn install --ignore-engines && yarn prod && cd ../client && yarn install --ignore-engines && yarn prod:build"
     }
   }
 };
