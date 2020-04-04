@@ -8,7 +8,7 @@ module.exports = {
       name: process.env.APP_NAME,
       args: ["--color"],
       interpreter: process.env.NODE_PATH,
-      script: path.resolve(__dirname, "server", "index.js"),
+      script: path.resolve(__dirname, "index.js"),
       instances: process.env.INSTANCES || 0,
       exec_mode: "cluster",
       watch: true,
