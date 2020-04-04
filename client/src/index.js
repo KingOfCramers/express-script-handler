@@ -1,26 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, NavLink as Link, Route } from 'react-router-dom';
+import loadable from 'react-loadable';
 
-const HomeComponent = ( props ) => {
-    return (
-        <h1>Wone Component!</h1>
-    );
-}
+const LoadingComponent = () => <h3>Please wait...</h3>;
 
-// about route component
-const AboutComponent = ( props ) => {
-    return (
-        <h1>About Component!</h1>
-    );
-}
+const AsyncContactComponent = loadable({
+  loader: () => import("./contact.component"),
+  loading: LoadingComponent
+});
 
-// contact route component
-const ContactComponent = ( props ) => {
-    return (
-        <h1>Contact Component!</h1>
-    );
-}
+const AsyncHomeComponent = loadable({
+  loader: () => import("./home.component"),
+  loading: LoadingComponent
+});
+
+const AsyncAboutComponent = loadable({
+  loader: () => import("./about.component"),
+  loading: LoadingComponent
+});
 
 // create sample App component
 class App extends React.Component {
@@ -39,9 +37,9 @@ class App extends React.Component {
                     </div>
                     
                     <Switch>
-                        <Route exact path="/" component={ HomeComponent } />
-                        <Route path="/about" component={ AboutComponent } />
-                        <Route path="/contact" component={ ContactComponent } />
+                        <Route exact path="/" component={ AsyncHomeComponent } />
+                        <Route path="/about" component={ AsyncAboutComponent } />
+                        <Route path="/contact" component={ AsyncContactComponent } />
                     </Switch>
                 </div>
             </BrowserRouter>

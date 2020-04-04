@@ -3,8 +3,7 @@
     "prod:build": "webpack --mode production --config webpack.config.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:express": "cd ../server && yarn dev",
-    "dev:webpack-server": "webpack-dev-server --open",
-    "prod:build": "webpack --mode production --config webpack.config.js"
+    "dev:webpack-server": "webpack-dev-server --open"
   },
   "name": "front_end",
   "version": "1.0.0",
@@ -24,12 +23,14 @@
     "html-webpack-plugin": "^4.0.2",
     "npm-run-all": "^4.1.5",
     "webpack": "^4.42.1",
+    "webpack-async-chunk-names-plugin": "^0.1.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-loadable": "^5.5.0",
     "react-router-dom": "^5.1.2"
   }
 }
