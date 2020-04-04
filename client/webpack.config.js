@@ -50,6 +50,10 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       }
     ]
   },
@@ -58,7 +62,7 @@ module.exports = {
       template: "./src/index.html",
       filename: "index.html"
     }),
-    //new CompressionPlugin(), // Compress assets
+    new CompressionPlugin(), // Compress assets
     new CleanWebpackPlugin(), // Gut the dist folder during every build
     new AsyncChunkNames() // Names our async chunks after the files they are imported from
   ]

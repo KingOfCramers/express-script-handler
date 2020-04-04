@@ -1,51 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, NavLink as Link, Route } from 'react-router-dom';
-import loadable from 'react-loadable';
+import { Provider } from 'react-redux';
+import AppRouter from './routers/AppRouter';
+import configureStore from './store/configureStore';
+import 'normalize.css/normalize.css';
 
-const LoadingComponent = () => <h3>Please wait...</h3>;
+import { PersistGate } from 'redux-persist/integration/react'
+const { store, persistor } = configureStore();
 
-const AsyncContactComponent = loadable({
-  loader: () => import("./contact.component"),
-  loading: LoadingComponent
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { indigo, teal, red, grey } from "@material-ui/core/colors";
+const theme = createMuiTheme({
+  palette: {
+    primary: indigo,
+    secondary: teal,
+    error: red,
+    darkPrimary: '#044980',
+    grey
+  },
 });
 
-const AsyncHomeComponent = loadable({
-  loader: () => import("./home.component"),
-  loading: LoadingComponent
-});
+const jsx = (
+  <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <MuiThemeProvider theme={theme}>
+          <AppRouter />
+        </MuiThemeProvider>
+      </PersistGate>
+  </Provider>
+);
 
-const AsyncAboutComponent = loadable({
-  loader: () => import("./about.component"),
-  loading: LoadingComponent
-});
-
-// create sample App component
-class App extends React.Component {
-    constructor( props ) {
-        super( props );
-    }
-
-    render() {
-        return(
-            <BrowserRouter>
-                <div>
-                    <div className="menu">
-                        <Link exact to="/" activeClassName="active">Home</Link>
-                        <Link to="/about" activeClassName="active">About</Link>
-                        <Link to="/contact" activeClassName="active">Contact</Link>
-                    </div>
-                    
-                    <Switch>
-                        <Route exact path="/" component={ AsyncHomeComponent } />
-                        <Route path="/about" component={ AsyncAboutComponent } />
-                        <Route path="/contact" component={ AsyncContactComponent } />
-                    </Switch>
-                </div>
-            </BrowserRouter>
-        );
-    }
-}
-
-// render inside `app-root` element
-ReactDOM.render( <App />, document.getElementById( 'app' ) );
+ReactDOM.render(jsx, document.getElementById('app'));
