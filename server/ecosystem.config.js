@@ -26,7 +26,8 @@ module.exports = {
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",
       path: "/home/harrison/API",
-      "post-deploy": `cd server && yarn install --ignore-engines && scp -r envs harrison@${process.env.HOST}:/home/harrison/API/current/server && yarn prod && cd ../client && yarn install --ignore-engines && yarn prod:build`
+      "pre-deploy": `scp -r envs harrison@${process.env.HOST}:/home/harrison/API/current/server`,
+      "post-deploy": `cd server && yarn install --ignore-engines && yarn prod && cd ../client && yarn install --ignore-engines && yarn prod:build`
     }
   }
 };
