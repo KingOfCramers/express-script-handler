@@ -1,6 +1,7 @@
 require("dotenv").config({ path: `./envs/.${process.env.NODE_ENV}.env` });
 const path = require("path");
 
+
 module.exports = {
   apps: [
     {
@@ -25,7 +26,7 @@ module.exports = {
       ref: "origin/master",
       repo: "git@github.com:KingOfCramers/express-script-handler.git",
       path: "/home/harrison/API",
-      "post-deploy": `cd server && yarn install --ignore-engines && scp -r envs ${process.env.USER}@${process.env.HOST}:/home/${process.env.USER}/API/current/server && yarn prod && cd ../client && yarn install --ignore-engines && yarn prod:build`
+      "post-deploy": `cd server && yarn install --ignore-engines && scp -r envs harrison@${process.env.HOST}:/home/harrison/API/current/server && yarn prod && cd ../client && yarn install --ignore-engines && yarn prod:build`
     }
   }
 };
