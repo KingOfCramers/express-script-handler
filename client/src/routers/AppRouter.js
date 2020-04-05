@@ -1,10 +1,10 @@
 import React from "react";
 import { Router, Route, Switch, Link, NavLink } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import Loadable from "react-loadable";
 
 import Loading from "../components/Loading";
 import Header from "../components/Header";
+import history from "../history";
 
 // Routes
 const NotFound = Loadable({
@@ -23,8 +23,6 @@ const HomeComponent = Loadable({
   loader: () => import("../components/Home"),
   loading: Loading
 });
-
-export const history = createBrowserHistory();
 
 const AppRouter = () => (
   <Router history={history}>

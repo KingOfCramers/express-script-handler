@@ -7,8 +7,11 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Fade from "@material-ui/core/Fade";
+import Drawer from "@material-ui/core/Drawer";
 
 import { makeStyles } from "@material-ui/core/styles";
+
+import Links from "../Links";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,6 +24,8 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  drawer: {
   }
 }));
 
@@ -29,6 +34,10 @@ const Header = () => {
 
   const [scrolling, setScrolling] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = () => setOpen(!open);
+  const handleDrawerClose = () => setOpen(false);
 
   useEffect(() => {
     const onScroll = e => {
@@ -43,25 +52,29 @@ const Header = () => {
   return (
     <Fragment>
       <Fade in={!scrolling}>
-        <AppBar position="fixed">
-          <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              variant="title"
-            >
-              <MenuIcon />
+        <Fragment>
+          <AppBar position="fixed">
+            <Toolbar>
+              <IconButton
+                className={classes.menuButton}
+                color="inherit"
+                variant="title"
+                onClick={toggleDrawer}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h3" color="inherit" className={classes.flex}>
+                Title
+              </Typography>
+              <Button>Login</Button>
+            </Toolbar>
+          </AppBar>
+          <Drawer className={classes.drawer} anchor="left" open={open}>
+            <IconButton onClick={handleDrawerClose}>
+              <Links />
             </IconButton>
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.flex}
-            >
-              Title
-            </Typography>
-            <Button>Login</Button>
-          </Toolbar>
-        </AppBar>
+          </Drawer>
+        </Fragment>
       </Fade>
       <div className={classes.toolbarMargin} />
     </Fragment>
