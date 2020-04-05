@@ -14,3 +14,4 @@ client.on("error", err => logger.error(err));
 client.on("connect", _ => logger.info("Redis connected."));
 
 module.exports = client;
+

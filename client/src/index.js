@@ -15,7 +15,6 @@ const theme = createMuiTheme({
     primary: indigo,
     secondary: teal,
     error: red,
-    darkPrimary: '#044980',
     grey
   },
 });

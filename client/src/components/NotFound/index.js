@@ -5,6 +5,6 @@ const NotFoundPage = ( props ) => {
     return (
         <span>Im not a route!</span>
     );
-}
+};
 
 export default NotFoundPage;
