@@ -11,7 +11,7 @@ import Drawer from "@material-ui/core/Drawer";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import Links from "../Links";
+import Links from "./Links";
 
 const useStyles = makeStyles(theme => ({
   root: {
