@@ -3,7 +3,7 @@
     "prod:build": "webpack --mode production --config webpack.config.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:express": "cd ../server && yarn dev",
-    "dev:webpack-server": "webpack-dev-server --open"
+    "dev:webpack-server": "webpack-dev-server"
   },
   "name": "front_end",
   "version": "1.0.0",

@@ -36,6 +36,7 @@ module.exports = {
   devServer: {
     // Essentially an Express server w/ hot reloading
     contentBase: path.join(__dirname, "./dist"),
+    open: false, // Do not automatically open the Chrome browser.
     port: 3001,
     hot: true, // Reload files on change...
     headers: {
@@ -47,10 +48,10 @@ module.exports = {
     },
     proxy: {
       "/api": {
-target: {
-host: "127.0.0.1",
-port: 3005,
-},
+        target: {
+          host: "127.0.0.1",
+          port: 3005
+        },
         pathRewrite: { "^/api": "" } // Will proxy all /api/whatever requests to localhost:3000/whatever
       }
     }
