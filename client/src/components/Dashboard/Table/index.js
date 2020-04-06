@@ -24,10 +24,13 @@ const TableComponent = props => {
   const classes = useStyles();
   const [loading, setLoading] = useState([]);
   const [data, setData] = useState([]);
-  const [dataSource, setDataSource] = useState("committees/house/hfacs");
+  const [headers, setHeaders] = useState([]);
+  const [dataSource] = useState("committees/house/hfacs");
+  const [headerSource] = useState("keys/house/hfacs");
 
   useEffect(() => {
-    fetchTableData(dataSource).then(newData => {
+    fetchTableData(dataSource, headerSource).then(({ newHeaders, newData }) => {
+      setHeaders(newHeaders);
       setData(newData);
       setLoading(false);
     });
@@ -38,23 +41,19 @@ const TableComponent = props => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Created</TableCell>
-            <TableCell align="right">High</TableCell>
-            <TableCell align="right">Low</TableCell>
-            <TableCell align="right">Average</TableCell>
+            {Object.keys(headers).map((x,i) => {
+              return <TableCell key={i}>{x}</TableCell>
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map(item => {
+            console.log(item)
             return (
               <TableRow key={item._id}>
-                <TableCell component="th" scope="row">
-                  {item.type}
-                </TableCell>
-                <TableCell align="right">{item.location}</TableCell>
-                <TableCell align="right">{item.time}</TableCell>
-                <TableCell align="right">{item.title}</TableCell>
+                {Object.keys(headers).map((x,i) => {
+                  return <TableCell key={`${i}`}>{item[x]}</TableCell> 
+                })}
               </TableRow>
             );
           })}
