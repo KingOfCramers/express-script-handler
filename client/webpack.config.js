@@ -23,12 +23,13 @@ module.exports = {
           name: "modules",
           chunks: "all",
           test: /node_modules/
+        },
+        common: {
+          // Create common chunks for every module imported into more than 2x
+          name: "common",
+          minChunks: 2,
+          enforce: true // Force webpack to make the chunk, regardless of size
         }
-        //common: { // Create common chunks for every module imported into more than 2x
-        //name: 'common',
-        //minChunks: 2,
-        //enforce: true // Force webpack to make the chunk, regardless of size
-        //}
       }
     }
   },
