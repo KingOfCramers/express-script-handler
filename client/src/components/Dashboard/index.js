@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Table from "./Table";
+import { DataTable } from "./DataTable";
 
 // contact route component
 const DashboardComponent = props => {
   return (
     <div>
       <h2>Dashboard Component</h2>
-      <Table />
+      <DataTable source="committees/house/hfacs"/>
     </div>
   );
 };
