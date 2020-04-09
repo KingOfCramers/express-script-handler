@@ -4,7 +4,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Fade from "@material-ui/core/Fade";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AsyncHook as useTableData } from "../../AsyncHook";
@@ -25,6 +24,14 @@ const useStyles = makeStyles(theme => ({
 // than zero, thus sorting the row.
 const comparator = (prop, desc = true) => (a, b) => {
   const order = desc ? -1 : 1;
+  if (!a[prop] && b[prop]) {
+    // IF EITHER PROPERTY IS UNDEFINED, RETURN THE OTHER ONE FIRST
+    return 1;
+  }
+  if (a[prop] && !b[prop]) {
+    // IF EITHER PROPERTY IS UNDEFINED, RETURN THE OTHER ONE FIRST
+    return -1;
+  }
 
   if (a[prop] < b[prop]) {
     return -1 * order;
@@ -39,28 +46,43 @@ const comparator = (prop, desc = true) => (a, b) => {
 
 export const DataTable = props => {
   // We have another component handle this Table's state.
+  const [sortBy, setSortBy] = useState("_id");
+  const [sortOrder, setSortOrder] = useState(true);
+
   const { execute, pending, value, error } = useTableData(
     fetchTableData,
     [props.source],
-    true
+    true // Call on initial mount
   );
+
+  //useEffect(() => {
+  //execute();
+  //}, []);
 
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
       {value && (
-        <Table onClick={execute}>
+        <Table>
           <TableHead>
             <TableRow>
-              <Headers headers={Object.keys(value[0])} />
+              <Headers
+                sortOrder={sortOrder}
+                setSortBy={setSortBy}
+                setSortOrder={setSortOrder}
+                headers={Object.keys(value[0])}
+              />
             </TableRow>
           </TableHead>
           <TableBody>
-            {value.map(doc => (
-              <TableRow key={doc._id}>
-                <Cells doc={doc} cols={Object.keys(value[0])} data={value} />
-              </TableRow>
-            ))}
+            {value
+              .slice()
+              .sort(comparator(sortBy, sortOrder))
+              .map(doc => (
+                <TableRow key={doc._id}>
+                  <Cells doc={doc} cols={Object.keys(value[0])} data={value} />
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       )}

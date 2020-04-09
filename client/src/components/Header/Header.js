@@ -1,18 +1,14 @@
-import React, { useState, useEffect, Fragment } from "react";
-
+import React, { useState } from "react";
+import { IconButton } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/Appbar";
+import Button from "@material-ui/core/Button";
+import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Fade from "@material-ui/core/Fade";
-import Drawer from "@material-ui/core/Drawer";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-import Links from "./Links";
 import { Fader } from "../Fader";
+import { SideCar } from "../SideCar";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +30,6 @@ export const Header = () => {
 
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => setOpen(!open);
-  const handleDrawerClose = () => setOpen(false);
 
   return (
     <Fader>
@@ -54,11 +49,7 @@ export const Header = () => {
           <Button>Login</Button>
         </Toolbar>
       </AppBar>
-      <Drawer className={classes.drawer} anchor="left" open={open}>
-        <IconButton onClick={handleDrawerClose}>
-          <Links />
-        </IconButton>
-      </Drawer>
+      <SideCar open={open} toggleDrawer={toggleDrawer} />
     </Fader>
   );
 };

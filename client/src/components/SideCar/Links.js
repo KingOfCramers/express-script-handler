@@ -4,8 +4,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-
 import history from "../../history";
 
 const useStyles = makeStyles(theme => ({
@@ -16,19 +14,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Links = () => {
+export const Links = props => {
   const classes = useStyles();
   const handleNavigation = (event, item) => {
+    props.toggleDrawer();
     history.push(item.link);
   };
   return (
     <div className={classes.root}>
-      <ChevronLeftIcon />
       <List>
         {[
           { name: "Dashboard", link: "dashboard" },
           { name: "About", link: "about" },
-          { name: "Contact", link: "contact" },
+          { name: "Contact", link: "contact" }
         ].map((item, index) => (
           <ListItem
             button
@@ -44,5 +42,3 @@ const Links = () => {
     </div>
   );
 };
-
-export default Links;
