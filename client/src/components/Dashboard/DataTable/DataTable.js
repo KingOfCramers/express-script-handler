@@ -55,10 +55,6 @@ export const DataTable = props => {
     true // Call on initial mount
   );
 
-  //useEffect(() => {
-  //execute();
-  //}, []);
-
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
@@ -69,6 +65,7 @@ export const DataTable = props => {
               <Headers
                 sortOrder={sortOrder}
                 setSortBy={setSortBy}
+                sortBy={sortBy}
                 setSortOrder={setSortOrder}
                 headers={Object.keys(value[0])}
               />
