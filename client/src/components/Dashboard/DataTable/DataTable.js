@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import React, { useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
 
-import { AsyncHook as useTableData } from "../../AsyncHook";
-import { fetchTableData } from "./api/fetchTableData";
-import { MaybeLoading } from "./MaybeLoading";
-import { Headers } from "./Headers";
 import { Cells } from "./Cells";
+import { ErrorBoundary } from "../../ErrorBoundary/ErrorBoundary";
+import { Footer } from "./Footer";
+import { Headers } from "./Headers";
+import { MaybeLoading } from "./MaybeLoading";
+import { fetchTableData } from "./api/fetchTableData";
+import { AsyncHook as useTableData } from "../../AsyncHook";
 
 const useStyles = makeStyles(theme => ({
   header: {}
@@ -48,6 +50,8 @@ export const DataTable = props => {
   // We have another component handle this Table's state.
   const [sortBy, setSortBy] = useState("_id");
   const [sortOrder, setSortOrder] = useState(true);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
 
   const { execute, pending, value, error } = useTableData(
     fetchTableData,
@@ -57,33 +61,42 @@ export const DataTable = props => {
 
   const classes = useStyles();
   return (
-    <Paper className={classes.root}>
-      {value && (
-        <Table>
-          <TableHead>
-            <TableRow>
-              <Headers
-                sortOrder={sortOrder}
-                setSortBy={setSortBy}
-                sortBy={sortBy}
-                setSortOrder={setSortOrder}
-                headers={Object.keys(value[0])}
-              />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {value
-              .slice()
-              .sort(comparator(sortBy, sortOrder))
-              .map(doc => (
-                <TableRow key={doc._id}>
-                  <Cells doc={doc} cols={Object.keys(value[0])} data={value} />
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      )}
-      <MaybeLoading loading={pending} />
-    </Paper>
+    <ErrorBoundary>
+      <Paper className={classes.root}>
+        {value && (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <Headers
+                  sortOrder={sortOrder}
+                  setSortBy={setSortBy}
+                  sortBy={sortBy}
+                  setSortOrder={setSortOrder}
+                  headers={Object.keys(value[0])}
+                />
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {value
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .sort(comparator(sortBy, sortOrder))
+                .map(doc => (
+                  <TableRow key={doc._id}>
+                    <Cells doc={doc} cols={Object.keys(value[0])} data={value} />
+                  </TableRow>
+                ))}
+            </TableBody>
+            <Footer
+              rows={value}
+              rowsPerPage={rowsPerPage}
+              setRowsPerPage={setRowsPerPage}
+              page={page}
+              setPage={setPage}
+            />
+          </Table>
+        )}
+        <MaybeLoading loading={pending} />
+      </Paper>
+    </ErrorBoundary>
   );
 };
