@@ -1,8 +1,6 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const AsyncChunkNames = require("webpack-async-chunk-names-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -61,8 +59,6 @@ module.exports = {
       template: "./src/index.html",
       filename: "index.html"
     }),
-    //    new CompressionPlugin(), // Compress assets
     new CleanWebpackPlugin(), // Gut the dist folder during every build
-    // new AsyncChunkNames() // Names our async chunks after the files they are imported from
   ]
 };
