@@ -1,10 +1,14 @@
 import axios from "axios";
-export const fetchTableData = async (dataSource, metaSource) => {
+export const fetchTableData = async (dataSource, search) => {
   let api =
     process.env.NODE_ENV === "production"
       ? "https://dcdocs.app"
       : "http://localhost:3001/api";
-  console.log(`Fetching data from ${api}/data/${dataSource}`)
-  let res = await axios.get(`${api}/data/${dataSource}`);
+  let query = search
+    ? `${api}/data/${dataSource}?date=${search}`
+    : `${api}/data/${dataSource}`;
+  //const query = `${api}/data/${dataSource}?${hasSearch}`;
+  //console.log(`Fetching data from ${query}`);
+  let res = await axios.get(query);
   return res.data;
 };

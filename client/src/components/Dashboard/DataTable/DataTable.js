@@ -11,8 +11,6 @@ import { ErrorBoundary } from "../../ErrorBoundary/ErrorBoundary";
 import { Footer } from "./Footer";
 import { Headers } from "./Headers";
 import { MaybeLoading } from "./MaybeLoading";
-import { fetchTableData } from "./api/fetchTableData";
-import { AsyncHook as useTableData } from "../../AsyncHook";
 
 const useStyles = makeStyles(theme => ({
   header: {}
@@ -46,18 +44,12 @@ const comparator = (prop, desc = true) => (a, b) => {
   return 0 * order;
 };
 
-export const DataTable = props => {
+export const DataTable = ({ value, pending, error }) => {
   // We have another component handle this Table's state.
   const [sortBy, setSortBy] = useState("_id");
   const [sortOrder, setSortOrder] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
-
-  const { execute, pending, value, error } = useTableData(
-    fetchTableData,
-    [props.source],
-    true // Call on initial mount
-  );
 
   const classes = useStyles();
   return (

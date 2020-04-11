@@ -14,23 +14,7 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      // The split chunks plugin
-      cacheGroups: {
-        default: false,
-        vendors: false,
-        vendor: {
-          // Create a chunk to include node_modules dependencies.
-          name: "modules",
-          chunks: "all",
-          test: /node_modules/
-        },
-        common: {
-          // Create common chunks for every module imported into more than 2x
-          name: "common",
-          minChunks: 2,
-          enforce: true // Force webpack to make the chunk, regardless of size
-        }
-      }
+      chunks: "all" // Split all chunks, including sync
     }
   },
   devtool: "inline-source-map", // Allows us to see errors in specific modules rather than the entire bundle.js file
@@ -44,8 +28,7 @@ module.exports = {
       // Allow CORS
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers":
-        "X-Requested-With, content-type, Authorization"
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     },
     proxy: {
       "/api": {
@@ -78,8 +61,8 @@ module.exports = {
       template: "./src/index.html",
       filename: "index.html"
     }),
-    new CompressionPlugin(), // Compress assets
+    //    new CompressionPlugin(), // Compress assets
     new CleanWebpackPlugin(), // Gut the dist folder during every build
-    new AsyncChunkNames() // Names our async chunks after the files they are imported from
+    // new AsyncChunkNames() // Names our async chunks after the files they are imported from
   ]
 };

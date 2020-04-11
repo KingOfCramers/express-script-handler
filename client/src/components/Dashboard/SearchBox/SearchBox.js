@@ -1,9 +1,15 @@
 import { InputAdornment, TextField } from "@material-ui/core";
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
-export const SearchBox = ({ filter, setFilter }) => {
-  const onSearchChange = e => {
+import IconButton from "@material-ui/core/IconButton";
+
+export const SearchBox = ({ filter, setFilter, search }) => {
+  const handleSearch = e => {
     e.preventDefault();
+    search(filter);
+  };
+
+  const onSearchChange = e => {
     setFilter(e.target.value);
   };
 
@@ -16,7 +22,9 @@ export const SearchBox = ({ filter, setFilter }) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SearchIcon />
+            <IconButton onClick={handleSearch}>
+              <SearchIcon />
+            </IconButton>
           </InputAdornment>
         )
       }}

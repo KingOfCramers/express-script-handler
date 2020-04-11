@@ -1,25 +1,27 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Router, Route, Switch, Link, NavLink } from "react-router-dom";
 
 import { Header } from "../components/Header";
 import history from "../history";
 
-import NotFound from "../components/NotFound";
-import ContactComponent from "../components/Contact";
-import AboutComponent from "../components/About";
-import DashboardComponent from "../components/Dashboard";
+const NotFound = lazy(() => import("../components/NotFound"));
+const Contact = lazy(() => import("../components/Contact"));
+const About = lazy(() => import("../components/About"));
+const Dashboard = lazy(() => import("../components/Dashboard"));
 
 const AppRouter = () => (
   <Router history={history}>
     <div>
       <Header />
-      <Switch>
-        <Route path="/dashboard" component={DashboardComponent} />
-        <Route path="/contact" component={ContactComponent} />
-        <Route path="/about" component={AboutComponent} />
-        <Route path="/" component={DashboardComponent} exact={true} />
-        <Route component={NotFound} />
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/about" component={About} />
+          <Route path="/" component={Dashboard} exact={true} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </div>
   </Router>
 );
