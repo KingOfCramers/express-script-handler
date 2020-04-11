@@ -4,3 +4,5 @@ import React from "react";
 export const NotFound = props => {
   return <span>Im not a route!</span>;
 };
+
+export default NotFound;

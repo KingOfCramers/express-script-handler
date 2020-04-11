@@ -1,7 +1,7 @@
 import React from "react";
 
 // contact route component
-export const Contact = props => {
+export const About = props => {
   return (
     <div>
       <h1>Contact Component!</h1>
@@ -42,4 +42,4 @@ export const Contact = props => {
   );
 };
 
-export default Contact;
+export default About;

@@ -5,7 +5,7 @@ import { SearchBox } from "./SearchBox/SearchBox";
 import { fetchTableData } from "./DataTable/api/fetchTableData";
 
 // contact route component
-export const Dashboard = props => {
+export const Dashboard = () => {
   const [filter, setFilter] = useState("");
   const [pending, setPending] = useState(false);
   const [value, setValue] = useState(null);
@@ -20,11 +20,6 @@ export const Dashboard = props => {
       .catch(err => setError(err))
       .finally(() => setPending(false));
   }, []);
-  //const { execute, pending, value, error } = useTableData(
-  //fetchTableData,
-  //["committees/house/hfacs", filter],
-  //true // Call on initial mount
-  //);
 
   return (
     <div>
@@ -34,3 +29,5 @@ export const Dashboard = props => {
     </div>
   );
 };
+
+export default Dashboard;

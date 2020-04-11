@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TableCell from "@material-ui/core/TableCell";
 import capitalize from "../../../util/capitalize";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
@@ -20,3 +21,11 @@ export const Headers = ({ setSortBy, sortBy, sortOrder, setSortOrder, headers })
     </TableCell>
   ));
 };
+
+Headers.propTypes = {
+  setSortBy: PropTypes.func,
+  sortBy: PropTypes.string,
+  sortOrder: PropTypes.bool,
+  setSortOrder: PropTypes.func,
+  headers: PropTypes.array
+}

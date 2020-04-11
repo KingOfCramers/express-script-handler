@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
@@ -11,6 +12,7 @@ import { ErrorBoundary } from "../../ErrorBoundary/ErrorBoundary";
 import { Footer } from "./Footer";
 import { Headers } from "./Headers";
 import { MaybeLoading } from "./MaybeLoading";
+import { TableError } from "./TableError";
 
 const useStyles = makeStyles(theme => ({
   header: {}
@@ -22,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 // function, which is implicitly passed the two rows, a + b.
 // That function then reuturns either less than 0, 0 or greater
 // than zero, thus sorting the row.
-const comparator = (prop, desc = true) => (a, b) => {
+export const comparator = (prop, desc = true) => (a, b) => {
   const order = desc ? -1 : 1;
   if (!a[prop] && b[prop]) {
     // IF EITHER PROPERTY IS UNDEFINED, RETURN THE OTHER ONE FIRST
@@ -55,7 +57,7 @@ export const DataTable = ({ value, pending, error }) => {
   return (
     <ErrorBoundary>
       <Paper className={classes.root}>
-        {value && (
+        {value && !error && (
           <Table>
             <TableHead>
               <TableRow>
@@ -88,7 +90,14 @@ export const DataTable = ({ value, pending, error }) => {
           </Table>
         )}
         <MaybeLoading loading={pending} />
+        {error && <TableError error={error} />}
       </Paper>
     </ErrorBoundary>
   );
+};
+
+DataTable.propTypes = {
+  pending: PropTypes.bool,
+  error: PropTypes.object,
+  value: PropTypes.array
 };

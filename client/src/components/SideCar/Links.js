@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -14,10 +15,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Links = props => {
+export const Links = ({ toggleDrawer }) => {
   const classes = useStyles();
   const handleNavigation = (event, item) => {
-    props.toggleDrawer();
+    toggleDrawer();
     history.push(item.link);
   };
   return (
@@ -27,7 +28,7 @@ export const Links = props => {
           { name: "Dashboard", link: "dashboard" },
           { name: "About", link: "about" },
           { name: "Contact", link: "contact" }
-        ].map((item, index) => (
+        ].map((item, i) => (
           <ListItem
             button
             key={item.name}
@@ -42,3 +43,7 @@ export const Links = props => {
     </div>
   );
 };
+
+Links.propTypes = {
+  toggleDrawer: PropTypes.func
+}

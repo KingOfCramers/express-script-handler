@@ -1418,6 +1418,11 @@ babel-plugin-react@^1.0.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-react/-/babel-plugin-react-1.0.0.tgz#29a959f9b06fc58a3af27bf58d16be2dc1031dff"
   integrity sha1-KalZ+bBvxYo68nv1jRa+LcEDHf8=
 
+babel-plugin-transform-react-remove-prop-types@^0.4.24:
+  version "0.4.24"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.24.tgz#f2edaf9b4c6a5fbe5c1d678bfb531078c1555f3a"
+  integrity sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -6590,6 +6595,11 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   integrity sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==
   dependencies:
     minimalistic-assert "^1.0.0"
+
+webpack-async-chunk-names-plugin@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/webpack-async-chunk-names-plugin/-/webpack-async-chunk-names-plugin-0.1.1.tgz#ebb8deda59887603331ff2cabbaee5b853fe0bb5"
+  integrity sha1-67je2lmIdgMzH/LKu67luFP+C7U=
 
 webpack-bundle-analyzer@^3.6.1:
   version "3.6.1"

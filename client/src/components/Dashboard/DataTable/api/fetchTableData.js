@@ -7,8 +7,6 @@ export const fetchTableData = async (dataSource, search) => {
   let query = search
     ? `${api}/data/${dataSource}?date=${search}`
     : `${api}/data/${dataSource}`;
-  //const query = `${api}/data/${dataSource}?${hasSearch}`;
-  //console.log(`Fetching data from ${query}`);
   let res = await axios.get(query);
   return res.data;
 };

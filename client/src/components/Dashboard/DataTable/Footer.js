@@ -111,3 +111,11 @@ export const Footer = ({ rows, rowsPerPage, setRowsPerPage, page, setPage }) => 
     </TableFooter>
   );
 };
+
+Footer.propTypes = {
+  rows: PropTypes.array,
+  rowsPerPage: PropTypes.number,
+  setRowsPerPage: PropTypes.func,
+  page: PropTypes.number,
+  setPage: PropTypes.func
+};

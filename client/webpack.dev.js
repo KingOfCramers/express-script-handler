@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const AsyncChunkNames = require("webpack-async-chunk-names-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -8,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
-    chunkFilename: "[name].[hash].js"
+    chunkFilename: "[name].[hash].js" // The names of our chunks.
   },
   optimization: {
     splitChunks: {
@@ -59,6 +60,7 @@ module.exports = {
       template: "./src/index.html",
       filename: "index.html"
     }),
-    new CleanWebpackPlugin(), // Gut the dist folder during every build
+    new AsyncChunkNames(),
+    new CleanWebpackPlugin() // Gut the dist folder during every build
   ]
 };

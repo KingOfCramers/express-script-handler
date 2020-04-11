@@ -1,7 +1,8 @@
-import { InputAdornment, TextField } from "@material-ui/core";
 import React from "react";
+import PropTypes from "prop-types";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
+import { InputAdornment, TextField } from "@material-ui/core";
 
 export const SearchBox = ({ filter, setFilter, search }) => {
   const handleSearch = e => {
@@ -17,7 +18,6 @@ export const SearchBox = ({ filter, setFilter, search }) => {
     <TextField
       value={filter}
       onChange={onSearchChange}
-      //className={classes.search}
       id="input-search"
       InputProps={{
         startAdornment: (
@@ -31,3 +31,9 @@ export const SearchBox = ({ filter, setFilter, search }) => {
     />
   );
 };
+
+SearchBox.propTypes = {
+  filter: PropTypes.string,
+  setFilter: PropTypes.func,
+  search: PropTypes.func
+}

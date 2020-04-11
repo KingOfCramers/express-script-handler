@@ -4,10 +4,10 @@ import { Router, Route, Switch, Link, NavLink } from "react-router-dom";
 import { Header } from "../components/Header";
 import history from "../history";
 
-const NotFound = lazy(() => import("../components/NotFound"));
-const Contact = lazy(() => import("../components/Contact"));
-const About = lazy(() => import("../components/About"));
-const Dashboard = lazy(() => import("../components/Dashboard"));
+const NotFound = lazy(() => import("../components/NotFound/NotFound"));
+const Contact = lazy(() => import("../components/Contact/Contact"));
+const About = lazy(() => import("../components/About/About"));
+const Dashboard = lazy(() => import("../components/Dashboard/Dashboard"));
 
 const AppRouter = () => (
   <Router history={history}>
